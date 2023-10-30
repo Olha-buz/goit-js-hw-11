@@ -28,5 +28,15 @@ function renderGallery(images) {
   `;
     })
     .join('');
-  gallery.innerHTML=markup;
+  gallery.innerHTML = markup;
+  
+    const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
+
 }

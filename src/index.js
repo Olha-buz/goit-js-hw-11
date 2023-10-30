@@ -10,12 +10,14 @@ const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 const btnLoadmore = document.querySelector('.load-more');
 
+btnLoadmore.style.display = 'none';
 
 form.addEventListener('submit', onSearchForm);
 
+
+let simplelightbox;
 let query = '';
 let page = 1;
-let simplelightbox;
 const per_page = 40;
 
 async function onSearchForm(evt) {
@@ -28,15 +30,16 @@ async function onSearchForm(evt) {
         return;
     };
     try {
-        const images = await fetchImages(query);
-        console.log(images.totalHits); //Вся кількість знайдених фото
+        const images = await fetchImages(query, page, per_page);
+        console.log(images.total); //Вся кількість знайдених фото
 
         if (images.totalHits === 0) {
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
         } else {
             renderGallery(images.hits);
-            simplelightbox = new SimpleLightbox('.gallery a').refresh();
-            Notiflix.Notify.success(`Hooray! We found ${images.totalHits} images.`)
+            btnLoadmore.style.display = 'flex';
+
+            Notiflix.Notify.success(`Hooray! We found ${images.total} images.`)
         }
     } catch (error) {
         console.log(error);
@@ -44,4 +47,27 @@ async function onSearchForm(evt) {
     } finally {
         form.reset();
     }
+}
+
+new SimpleLightbox('.gallery a', {
+                overlay: true,
+                captions: true,
+                enableKeyboard: true,
+});
+
+btnLoadmore.addEventListener('click', onLoadMore);
+
+function onLoadMore() {
+      page += 1;
+
+      fetchImages(query, page, per_page)
+        .then(data => {
+         renderGallery(data.hits);
+
+       const totalPages = Math.ceil(data.totalHits / per_page);
+       if (page > totalPages) {
+            Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
+        }
+       })
+       .catch(error => console.log(error));
 }
