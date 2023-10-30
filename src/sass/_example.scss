@@ -52,5 +52,21 @@ input {
 
 .gallery {
   display: flex;
-  
+  flex-flow: row wrap;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.gallery-item {
+
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info-item {
+  text-align: center;
 }
