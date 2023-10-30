@@ -8,7 +8,7 @@ function renderGallery(images) {
       return `
     <a href='${image.largeImageURL} class="large-image-link">
     <div class="gallery-item" id=${image.id}>
-  <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" width="40"/> 
+  <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" width="320"/> 
   <div class="info">
     <p class="info-item">
       <b>Likes</b><br>${image.likes}
