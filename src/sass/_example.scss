@@ -26,3 +26,31 @@
   background-size: cover;
   background-position: center;
 }
+
+.search-form {
+  background-color: #687EFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+input {
+  background-color: white;
+  height: 32px;
+  border: none;
+}
+
+.search-btn {
+   height: 32px;
+   border: none;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.gallery {
+  display: flex;
+  
+}

@@ -2,7 +2,7 @@ import Notiflix from 'notiflix';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import { fetchImages } from './fetchImages';
-import { markUpGallery } from './markUpGallery';
+import { renderGallery } from './renderGallery';
 
 
 const body = document.querySelector('body');
@@ -18,30 +18,6 @@ let page = 1;
 let simplelightbox;
 const per_page = 40;
 
-// function onSearchForm(evt) {
-//     evt.preventDefault();
-//     query = evt.target.elements.searchQuery.value.trim();
-//     gallery.innerHTML = '';
-
-//     if (query === '') {
-//         Notiflix.Notify.failure('Please enter a search keyword!');
-//         return;
-//     };
-    
-//     fetchImages(query, page, per_page)
-//         .then(data => {
-//             if (data.hits.length === 0) {
-//                 Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-//             } else {
-//                 markUpGallery(data.hits);
-//                 simplelightbox = new SimpleLightbox('.gallery a').refresh();
-//                 Notiflix.Notify.success(`Hooray! We found ${data.hits.length} images.`)
-//             }
-//         })
-//         .catch(error => console.log(error))
-//         .finally(_ => form.reset());
-// }
-
 async function onSearchForm(evt) {
     evt.preventDefault();
     query = evt.target.elements.searchQuery.value.trim();
@@ -52,19 +28,15 @@ async function onSearchForm(evt) {
         return;
     };
     try {
-        const response = await fetchImages(query, page, per_page);
-        console.log(response);
-        const images = response.data.hits;
-        console.log(images);
-        const totalHits = response.data.totalHits;
-        console.log(totalHits);
+        const images = await fetchImages(query);
+        console.log(images.totalHits); //Вся кількість знайдених фото
 
-        if (images.length === 0) {
+        if (images.totalHits === 0) {
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
         } else {
-            markUpGallery(images);
+            renderGallery(images.hits);
             simplelightbox = new SimpleLightbox('.gallery a').refresh();
-            Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`)
+            Notiflix.Notify.success(`Hooray! We found ${images.totalHits} images.`)
         }
     } catch (error) {
         console.log(error);
