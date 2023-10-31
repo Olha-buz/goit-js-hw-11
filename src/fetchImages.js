@@ -2,7 +2,7 @@ import axios from 'axios';
 export { fetchImages };
 
 const api_url = 'https://pixabay.com/api';
-const api_key = '40320265-ffc4b9bddd432c9e266463445';
+const api_key = '40392012-08915947b5d4aadebea93b87b';
 
 async function fetchImages(request, page, per_page) {
     const params = {
