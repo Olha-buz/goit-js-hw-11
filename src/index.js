@@ -33,13 +33,20 @@ async function onSearchForm(evt) {
         const images = await fetchImages(query, page, per_page);
         console.log(images.total); //Вся кількість знайдених фото
 
-        if (images.totalHits === 0) {
+        if (images.total === 0) {
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
         } else {
             renderGallery(images.hits);
             btnLoadmore.style.display = 'flex';
-
-            Notiflix.Notify.success(`Hooray! We found ${images.total} images.`)
+            new SimpleLightbox('.gallery a', {
+                captions: true,
+                captionsData: 'alt',
+                captionDelay: 250,
+                fadeSpeed: 250,
+                captionSelector: "img",
+                enableKeyboard: true,
+            });
+            Notiflix.Notify.success(`Hooray! We found ${images.total} images.`);
         }
     } catch (error) {
         console.log(error);
@@ -49,11 +56,7 @@ async function onSearchForm(evt) {
     }
 }
 
-new SimpleLightbox('.gallery a', {
-                overlay: true,
-                captions: true,
-                enableKeyboard: true,
-});
+
 
 btnLoadmore.addEventListener('click', onLoadMore);
 

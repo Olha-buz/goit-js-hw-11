@@ -15,7 +15,7 @@ async function fetchImages(request, page, per_page) {
         per_page: per_page,
     }
     try {
-        const response = await axios.get(`${api_url}`, { params });
+        const response = await axios.get({api_url}, { params });
         console.log(response.data)
         return response.data;
     } catch (error) {
