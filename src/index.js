@@ -4,8 +4,6 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import { fetchImages } from './fetchImages';
 import { renderGallery } from './renderGallery';
 
-
-const body = document.querySelector('body');
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 const btnLoadmore = document.querySelector('.load-more');
