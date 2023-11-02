@@ -1,8 +1,8 @@
 {
   "name": "parcel-project-template",
   "version": "2.0.0",
-  "description": "Этот проект был создан при помощи Parcel. Для знакомства и настройки\r дополнительных возможностей [обратись к документации](https://parceljs.org/).",
-  "homepage": "https://Olha-buz.github.io/goit-js-hw-11",
+  "description": "",
+  "homepage": "https://Olha-buz.github.io/goit-js-hw-11/",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /goit-js-hw-11/"
@@ -25,11 +25,9 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
-    "buffer": "^6.0.3",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
     "posthtml-include": "^1.7.4"
   },
-  "browserslist": "> 0.5%, last 2 versions, not dead",
-
+  "browserslist": "> 0.5%, last 2 versions, not dead"
 }
